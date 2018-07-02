@@ -1,4 +1,4 @@
-class EnglishPoetryCorpusGenerator::Topic
+class EnglishPoetryCorpusGenerator::Poem
     extend EnglishPoetryCorpusGenerator::Concerns::Displayable
     attr_accessor :name
 

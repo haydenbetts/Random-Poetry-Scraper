@@ -1,15 +1,15 @@
 require 'pry'
 
-class EnglishPoetryCorpusGenerator::SchoolOrPeriod
+class EnglishPoetryCorpusGenerator::Poet
     extend EnglishPoetryCorpusGenerator::Concerns::Displayable
     attr_accessor :name
 
     @@all = [
-            "Augustan",
-            "Beat",
-            "Black Arts Movement",
-            "Black Mountain",
-            "Confessional"
+            "Marjorie Agosín",
+            "Jack Agüeros",
+            "Leslie Ahlstrand",
+            "Dilruba Ahmed",
+            "Zubair Ahmed",
             ]   
 
     def initialize(range)

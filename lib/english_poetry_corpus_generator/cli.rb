@@ -12,36 +12,19 @@ class EnglishPoetryCorpusGenerator::CLI
         while input != "Q"
 
             puts ""
-            puts "Display Poems by:"
-            puts "  Topic (T)"
-            puts "  Form (F)"
-            puts "  School or Period (S)"
-            puts "  Region (R)"
+            puts "Display Poets By Last Name (A-Z):"
             puts ""
             puts "Quit (Q)"
 
             input = gets.strip
-            list_filter_criteria(input)
+            list_results(input)
         end
     end
 
-    def list_filter_criteria(input)
-        case input 
-        when 'T'
-            # scrape birthdate ranges
-            # instantiate a new range for each
-            # EnglishPoetryCorpusGenerator::BirthdateRange.print_all_with_index
-            # which birthdate range do you want poets from?
-            # BirthDateRange.
-            # BirthDateRange.find_or_create_poet(region)
-            # 
-            EnglishPoetryCorpusGenerator::Topic.print_all_with_index
-        when 'F'
-            EnglishPoetryCorpusGenerator::Form.print_all_with_index
-        when 'S'
-            EnglishPoetryCorpusGenerator::SchoolOrPeriod.print_all_with_index
-        when 'R'
-            EnglishPoetryCorpusGenerator::Region.print_all_with_index         
-        end
+    def list_results(input)
+    #   Scrape poets starting on page w/ their last name
+    #   Instantiate all poets who appear on the
+    #   EnglishPoetryCorpusGenerator::Poet.all.print_by_last_name(input)
+    #   EnglishPoetryCorpusGenerator::Poet.print_all_with_index
     end
 end
