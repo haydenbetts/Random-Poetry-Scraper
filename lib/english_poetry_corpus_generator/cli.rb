@@ -3,7 +3,9 @@ require 'pry'
 class EnglishPoetryCorpusGenerator::CLI
 
     def initialize
-        page = EnglishPoetryCorpusGenerator::Scraper.initialize_index_page
+        array = EnglishPoetryCorpusGenerator::Scraper.new.scrape_index_page
+        EnglishPoetryCorpusGenerator::Poet.initialize_poets(array)
+        binding.pry
     end
 
     def call
