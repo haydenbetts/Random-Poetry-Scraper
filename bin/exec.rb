@@ -3,4 +3,4 @@
 require "bundler/setup"
 require "english_poetry_corpus_generator"
 
-puts "Hello"
+EnglishPoetryCorpusGenerator::CLI.new.call
