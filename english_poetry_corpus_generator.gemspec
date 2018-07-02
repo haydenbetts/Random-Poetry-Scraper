@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["haydenbetts"]
   spec.email         = ["haydenbetts@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = %q{Scrape and return poems from https://www.poetryfoundation.org/}
+  spec.description   = %q{English Poetry Corpus Generator is a command line gem which returns the text of poems scraped from the Poetry Foundation website.}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
