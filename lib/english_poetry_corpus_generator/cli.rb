@@ -1,6 +1,9 @@
+require 'pry'
+
 class EnglishPoetryCorpusGenerator::CLI
 
     def initialize
+        page = EnglishPoetryCorpusGenerator::Scraper.initialize_index_page
     end
 
     def call
@@ -9,8 +12,9 @@ class EnglishPoetryCorpusGenerator::CLI
         while input != "Q"
 
             puts ""
-            puts "Display Poets by:"
-            puts "  Birthdate Range (B)"
+            puts "Display Poems by:"
+            puts "  Topic (T)"
+            puts "  Form (F)"
             puts "  School or Period (S)"
             puts "  Region (R)"
             puts ""
@@ -23,7 +27,7 @@ class EnglishPoetryCorpusGenerator::CLI
 
     def list_filter_criteria(input)
         case input 
-        when 'B'
+        when 'T'
             # scrape birthdate ranges
             # instantiate a new range for each
             # EnglishPoetryCorpusGenerator::BirthdateRange.print_all_with_index
@@ -31,6 +35,9 @@ class EnglishPoetryCorpusGenerator::CLI
             # BirthDateRange.
             # BirthDateRange.find_or_create_poet(region)
             # 
+            EnglishPoetryCorpusGenerator::Topic.print_all_with_index
+        when 'F'
+            EnglishPoetryCorpusGenerator::Form.print_all_with_index
         when 'S'
             EnglishPoetryCorpusGenerator::SchoolOrPeriod.print_all_with_index
         when 'R'
