@@ -2,7 +2,7 @@ require 'pry'
 
 class EnglishPoetryCorpusGenerator::Poet
     extend EnglishPoetryCorpusGenerator::Concerns::Displayable
-    attr_accessor :name, :home_page
+    attr_accessor :name, :home_page, :poems
 
     @@all = []   
 
@@ -17,7 +17,7 @@ class EnglishPoetryCorpusGenerator::Poet
 
     def self.initialize_poets(poets)
         poets.each do |poet|
-            EnglishPoetryCorpusGenerator::Poet.new(poet)
+            EnglishPoetryCorpusGenerator::Poet.new(poet_attributes)
         end
     end
 

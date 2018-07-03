@@ -1,10 +1,10 @@
 require 'pry'
 require 'watir'
 class EnglishPoetryCorpusGenerator::CLI
-
+    attr_accessor :scraper
     def initialize
-        url = "https://www.poetryfoundation.org/poets/browse#page=1&sort_by=last_name"
-        @b = Watir::Browser.start url
+        self.scraper = EnglishPoetryCorpusGenerator::Scraper.new
+        self.scraper.scrape_filter_categories
     end
 
     def call
@@ -18,34 +18,25 @@ class EnglishPoetryCorpusGenerator::CLI
             puts "Quit (Q)"
 
             input = gets.strip
-            list_results(input)
+
+            case input 
+            when "S"
+                list_schools
+            end
         end
     end
 
-    def list_results(input)
-        case input
-        when "S"
-            # aria-controls="poet's-birthdate"
-            @b.element(:css, "a[aria-controls='school/period']").click
-
-            school_ul = @b.ul(class: 'o-compressedList').lis
-            
-            school_object_array = school_ul.collect do |school|
-                EnglishPoetryCorpusGenerator::SchoolPeriod.find_or_create_by_name(school.text)
-            end
+    def list_schools
 
             EnglishPoetryCorpusGenerator::SchoolPeriod.print_all_with_index
 
-            selection = gets.strip.to_i
+            input = gets.strip.to_i
             
-            if selection <= EnglishPoetryCorpusGenerator::SchoolPeriod.all.length && selection > 0
-                # return an 
-                # list_filtered_poems(#School or Period => beat)
+            
+            if input <= EnglishPoetryCorpusGenerator::SchoolPeriod.all.length && input > 0
+                school_name = EnglishPoetryCorpusGenerator::SchoolPeriod.all[input + 1].name
+                self.scraper.scrape_filtered_index_page('School / Period', school_name)
             end
-            
-            binding.pry
-
-        end
         # array = EnglishPoetryCorpusGenerator::Scraper.new.scrape_index_page
         # EnglishPoetryCorpusGenerator::Poet.initialize_poets(array)
         # binding.pry
@@ -57,7 +48,6 @@ class EnglishPoetryCorpusGenerator::CLI
     #   Much harder thing -
     end
 
-    # e.g. filter = School or Period, filter_choice = Beat
     def list_filtered_poems(filter, filter_choice)
 
     end

@@ -1,20 +1,23 @@
 class EnglishPoetryCorpusGenerator::Poem
     extend EnglishPoetryCorpusGenerator::Concerns::Displayable
-    attr_accessor :name
+    attr_accessor :name, :link, :poet
 
-    @@all = ["Love",
-            "Nature",
-            "Social Commentaries",
-            "Religion",
-            "Living",
-            "Relationships"]
+    @@all = []
 
-    def initialize(name)
-        self.name = name
+    def initialize(attributes)
+        if attributes
+            attributes.each do |k,v|
+              self.send("#{k}=", v)
+            end
+        end
         self.class.all << self
     end
 
     def self.all
         @@all
+    end
+
+    def self.initialize_poems
+        
     end
 end
