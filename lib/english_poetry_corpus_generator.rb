@@ -10,6 +10,8 @@ require "english_poetry_corpus_generator/scraper"
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
+require 'watir'
+
 
 module CorpusGenerator
   # Your code goes here...
