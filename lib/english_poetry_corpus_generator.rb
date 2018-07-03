@@ -5,6 +5,7 @@ require "english_poetry_corpus_generator/cli"
 require "english_poetry_corpus_generator/poet"
 require "english_poetry_corpus_generator/poem"
 require "english_poetry_corpus_generator/scraper"
+require "english_poetry_corpus_generator/school_period"
 #Dir["english_poetry_corpus_generator/*.rb"].each {|file| require file }
 
 require 'pry'
