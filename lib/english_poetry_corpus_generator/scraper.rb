@@ -16,8 +16,8 @@ class EnglishPoetryCorpusGenerator::Scraper
 
         self.schools_list_node = @browser.ul(class: 'o-compressedList').lis
             
-        self.schools_list_node.each do |school|
-            EnglishPoetryCorpusGenerator::SchoolPeriod.find_or_create_by_name(school.text)
+        self.schools_list_node.collect do |school|
+            school.text
         end    
     end
 

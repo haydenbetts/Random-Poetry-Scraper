@@ -4,17 +4,18 @@ class EnglishPoetryCorpusGenerator::CLI
     attr_accessor :scraper
     def initialize
         self.scraper = EnglishPoetryCorpusGenerator::Scraper.new
-        self.scraper.scrape_filter_categories
     end
 
     def call
+        school_names = self.scraper.scrape_filter_categories
+        EnglishPoetryCorpusGenerator::SchoolPeriod.create_schools_by_names(school_names)  
         input = ""
 
         while input != "Q"
 
-            puts "Display Poets By School / Period (S)"
-            puts "Display Poets By Last Name (A-Z):"
-            puts ""
+            puts "Welcome to the English Poetry Corpus Generator"
+            puts "Select one of the movements below to return 20 poems from that movement"
+            puts "To jump between poems, press tab"
             puts "Quit (Q)"
 
             input = gets.strip
@@ -28,26 +29,20 @@ class EnglishPoetryCorpusGenerator::CLI
 
     def list_schools
 
-            EnglishPoetryCorpusGenerator::SchoolPeriod.print_all_with_index
+        EnglishPoetryCorpusGenerator::SchoolPeriod.print_all_with_index
 
-            input = gets.strip.to_i
-            
-            
-            if input <= EnglishPoetryCorpusGenerator::SchoolPeriod.all.length && input > 0
-                school_name = EnglishPoetryCorpusGenerator::SchoolPeriod.all[input + 1].name
-                poet_attribute_hashes = self.scraper.scrape_filtered_index_page('School / Period', school_name)
-                EnglishPoetryCorpusGenerator::Poet.initialize_poets(poet_attribute_hashes)
-                binding.pry
+        input = gets.strip.to_i
+        
+        if input <= EnglishPoetryCorpusGenerator::SchoolPeriod.all.length && input > 0
+            school = EnglishPoetryCorpusGenerator::SchoolPeriod.all[input + 1]
+            poet_attribute_hashes = self.scraper.scrape_filtered_index_page(school.class.description, school.name)
+
+            poets = EnglishPoetryCorpusGenerator::Poet.initialize_poets(poet_attribute_hashes)
+            poets.each do |poet|
+                poet.add_poet_attributes({:schools => [school.name]})
             end
-        # array = EnglishPoetryCorpusGenerator::Scraper.new.scrape_index_page
-        # EnglishPoetryCorpusGenerator::Poet.initialize_poets(array)
-        # binding.pry
-    #   Scrape poets starting on page w/ their last name
-    #   Instantiate all poets who appear on the
-    #   EnglishPoetryCorpusGenerator::Poet.all.print_by_last_name(input)
-    #   EnglishPoetryCorpusGenerator::Poet.print_all_with_index
+        end
 
-    #   Much harder thing -
     end
 
     def list_filtered_poems(filter, filter_choice)
