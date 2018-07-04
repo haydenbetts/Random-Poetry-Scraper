@@ -15,6 +15,10 @@ class CorpusGenerator::Poet
         self.class.all << self
     end
 
+    def add_poem(poem)
+        self.poems << poem unless self.poems.detect {|poem| poem == self}
+    end
+
     # Class Methods
 
     def self.all
@@ -25,7 +29,7 @@ class CorpusGenerator::Poet
         self.all.detect {|poet| poet.name == name}
     end
 
-    def self.create_by_name
+    def self.create_by_name(name)
         self.new({:name => name})
     end
 

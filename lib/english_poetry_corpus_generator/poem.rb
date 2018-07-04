@@ -1,3 +1,5 @@
+require 'pry'
+
 class CorpusGenerator::Poem
     extend CorpusGenerator::Concerns::Displayable
     attr_accessor :name, :text, :poet
@@ -14,9 +16,12 @@ class CorpusGenerator::Poem
         self.class.all << self
     end
 
+    # this expects that if there is a poet attribute, it will have a name.
+    # that might hardcode too much knowledge about the structure of the hash?
     def poet=(poet_attributes)
         poet = CorpusGenerator::Poet.find_or_create_by_name(poet_attributes[:name])
-        # TODO resume here
+        @poet = poet
+        poet.add_poem(self)
     end
 
     # Class Methods
