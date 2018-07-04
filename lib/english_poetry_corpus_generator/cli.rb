@@ -2,6 +2,7 @@ require 'pry'
 require 'trollop'
 
 class CorpusGenerator::CLI
+    attr_accessor :current_poems_alphabetized
 
     def call
         commandline_options = accept_command_line_options
@@ -92,6 +93,7 @@ class CorpusGenerator::CLI
         puts "How would you like to find poems to read?"
         puts "List poems alphabetically (poems)"
         puts "List poets alphabetically (poets)"
+		puts "Or type exit to end the program."
 
         get_pleasure_reading_menu_input
     end
@@ -105,17 +107,43 @@ class CorpusGenerator::CLI
         input = gets.strip
         case input
         when 'poems'
+            poem_selection_instructions
             list_poems_alphabetically
+            get_poem_selection
         when 'poets'
         else
             puts "Invalid option!"
         end
     end
 
+    def poem_selection_instructions
+        puts "\nType the number of a poem to read it."
+		puts "Or type pleasure or p to return the pleasure reading menu."
+		puts "Or type exit to end the program."
+    end
+
     def list_poems_alphabetically
-        CorpusGenerator::Poem.all.sort_by {|poem| poem.name}.each.with_index(1) do |poem, index|
+        self.current_poems_alphabetized = CorpusGenerator::Poem.all.sort_by {|poem| poem.name}
+        self.current_poems_alphabetized.each.with_index(1) do |poem, index|
             puts "#{index}. #{poem.name} - #{poem.poet.name}"
         end
+    end
+
+    def get_poem_selection
+        input = nil
+        input_int = gets.strip.to_i
+        
+        if input_int > 0 && input_int <= self.current_poems_alphabetized.size
+            selected_poem = self.current_poems_alphabetized[input_int - 1]
+            display_poem(selected_poem)
+        else
+            puts "Please enter a valid poem selection!"
+        end
+    end
+
+    def display_poem(poem)
+        puts "#{poem.name} - #{poem.poet.name}"
+        puts "\n #{poem.text}"
     end
 
 end
