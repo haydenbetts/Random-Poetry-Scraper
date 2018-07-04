@@ -6,13 +6,15 @@ class CorpusGenerator::CLI
     def call
         commandline_options = accept_command_line_options
 
-        if commandline_options == []
+        if commandline_options == {}
             handle_help_message
         else
-            if !commandline_options.include?(:num_poems)
+            if commandline_options[:num_poems] == nil
                 handle_no_num_poems_message
-            elsif commandline_options.include?(:pleasure) && commandline_options.include?(:json)
+            elsif commandline_options[:json] && commandline_options[:pleasure]
                 handle_json_and_pleasure_message
+            else
+                handle_valid_command_line_options(commandline_options)
             end
         end 
     end
@@ -35,8 +37,7 @@ Usage:
           opt :json, "Output poems and their attributes directly to json"
           opt :pleasure, "Scrape poems and then enter a CLI for pleasure reading"
         end
-
-        opts.keys.select { |k| opts[k] }
+        opts.select { |k, v| opts[k] }
     end
 
     def handle_help_message
@@ -56,4 +57,30 @@ Usage:
         puts "Cannot run without a --num-poems selected"
         puts "Run with --help for help."
      end
+
+     def handle_valid_command_line_options(commandline_options)
+        get_poems(commandline_options[:num_poems])
+
+        if commandline_options[:pleasure]
+            menu
+        elsif commandline_options[:json]
+        end
+
+     end
+
+     def get_poems(num_poems)
+        num_poems.times do |i|
+            poem_attributes = CorpusGenerator::Scraper.new.scrape_poem_page
+            if poem = CorpusGenerator::Poem.new(poem_attributes)
+                puts "#{i + 1} poem(s) fetched succesfully."
+            else 
+                puts "Failed. Trying again."
+                i -= 1
+            end
+        end
+     end
+
+     def menu
+     end
+
 end

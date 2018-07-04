@@ -22,6 +22,6 @@ class CorpusGenerator::Scraper
             poem_attributes[:poet][:profile_url] = ROOT_LINK + html_doc.css(".poem a").attr("href").value
         end
 
-        return poem_attributes
+        poem_attributes == [] ? nil : poem_attributes
     end
 end
