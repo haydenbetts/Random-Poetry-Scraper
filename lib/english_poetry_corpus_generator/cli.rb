@@ -62,7 +62,6 @@ class CorpusGenerator::CLI
         get_poems(commandline_options[:num_poems])
 
         if commandline_options[:pleasure]
-            puts 
             pleasure_reading_menu
         elsif commandline_options[:json]
         end
@@ -86,8 +85,37 @@ class CorpusGenerator::CLI
     ##
     # => The pleasure reading interface
     ##
+
+    def pleasure_reading_menu
+        puts pleasure_reading_header
+
+        puts "How would you like to find poems to read?"
+        puts "List poems alphabetically (poems)"
+        puts "List poets alphabetically (poets)"
+
+        get_pleasure_reading_menu_input
+    end
+
     def pleasure_reading_header
         File.read('./fixtures/pleasure_reading_header')
+    end
+
+    def get_pleasure_reading_menu_input
+        input = nil
+        input = gets.strip
+        case input
+        when 'poems'
+            list_poems_alphabetically
+        when 'poets'
+        else
+            puts "Invalid option!"
+        end
+    end
+
+    def list_poems_alphabetically
+        CorpusGenerator::Poem.all.sort_by {|poem| poem.name}.each.with_index(1) do |poem, index|
+            puts "#{index}. #{poem.name} - #{poem.poet.name}"
+        end
     end
 
 end
