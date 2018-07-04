@@ -1,0 +1,101 @@
+CLI flow
+
+1. ⚽  English Poetry Corpus Generator requires you to pass in a flag indicating how many poems you want to return.
+       Additional flags will indicate whether you want to read the poems in your terminal (for pleasure), or
+       simply output json to be consume into another application.
+    Run with --help for help.
+2. Scrape and instantiate the number of poems passed in
+3. If the second flag said consume
+    - output json of the form
+    - poems => [
+        {title: },
+        {author: },
+        {text: }
+    ]
+3. If the second flag said read for pleasure
+puts "How would you like to discover poems?"
+puts "List poems"
+puts "List poet"
+
+def get_list_by_selection
+
+    case input
+    when 'list poems'
+        list_poems(Poem.all)
+
+        get_poem_selection
+
+        display_poem(@@current_poem)
+
+    when 'list poets'
+        list_poets
+
+        puts "Which poet's poems would you like to read?"
+
+        get_poet_selection
+
+        list_poems_by_poet(@@current_poet)
+
+        list_poems(@@current_poet.poems)
+
+        get_poem_selection
+
+        display_poem(@@current_poem)       
+
+    end
+end
+
+def get_poet_selection
+
+    i = gets.strip.to_i
+    # TODO I don't like this
+    @@current_poet = Poet.all.alphabetized[i + 1]
+end
+
+get poem_selection
+end
+
+
+def list_poems
+    # put alphabetized in the sortable class
+    Poem.all.alphabetized_by_name.each_with_index do |poem, index|
+        puts "#{index + 1}. #{poem.name} - #{poem.poet.name}"
+    end
+end
+
+def list_poets
+    Poet.all.alphabetized_by_name.each_with_index do |poet, index|
+        puts "#{index + 1}. #{{poet.name}"
+    end
+end
+
+def list_poems_by_poet
+    Poet.all.alphabetized_by_name.each_with_index do |poet, index|
+        puts "#{index + 1}. #{{poet.name}"
+    end
+end
+
+# how to go one level deep for list opens
+
+
+Example hash:
+
+example_hash = {:name => "Orstralia",
+    :text => "Orstralia – Orstralia
+            We think of you each day
+            Orstralia – Orstralia
+            At work or at play. 
+            We think of yew in the morning
+            And in the evening too
+            We even wake up at mid-night
+            So that we can think of you.
+            Orstralia – Orstralia
+            We love you from the heart
+            The kidney, the Liver and the giblets,
+            And every other part.",
+    :poet => {
+        :name => "Spike Milligan"
+    }
+}
+
+

@@ -4,16 +4,13 @@ require 'pry'
 
 class CorpusGenerator::Scraper
     attr_accessor :html_doc
-    BROWSE_LINK = "https://www.poetryfoundation.org/poets/browse"
+    BROWSE_LINK = "https://w0.poemhunter.com/members/random-poem/"
 
     def initialize
-        @html_doc = Nokogiri::HTML(open(BROWSE_LINK))
+        self.html_doc = Nokogiri::HTML(open(BROWSE_LINK))
     end
 
     def scrape_index_page
-        html_doc.css(".c-hdgSans").css("h2 a").collect do |node|
-            {"name" => node.text,
-            "home_page" => node.attr("href")}
-        end
+        poem_name = html_doc.css(".poem").css("h2").text
     end
 end
