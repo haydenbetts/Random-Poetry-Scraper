@@ -27,10 +27,10 @@ class CorpusGenerator::CLI
             Hayden Betts | @hayden_betts
             EOS
 
-            banner <<-EOS
+            banner <<~EOS
             \n📖  English Poetry Corpus Generator is a command line gem which returns the text of poems scraped from poemhunter.com.
             \n
-Usage:
+            Usage:
             \n
             EOS
           opt :num_poems, "Number of poems to return", :type => :integer    
@@ -62,7 +62,8 @@ Usage:
         get_poems(commandline_options[:num_poems])
 
         if commandline_options[:pleasure]
-            menu
+            puts 
+            pleasure_reading_menu
         elsif commandline_options[:json]
         end
 
@@ -71,6 +72,8 @@ Usage:
      def get_poems(num_poems)
         num_poems.times do |i|
             poem_attributes = CorpusGenerator::Scraper.new.scrape_poem_page
+
+            # TODO possibly factor out?
             if poem = CorpusGenerator::Poem.new(poem_attributes)
                 puts "#{i + 1} poem(s) fetched succesfully."
             else 
@@ -80,7 +83,11 @@ Usage:
         end
      end
 
-     def menu
-     end
+    ##
+    # => The pleasure reading interface
+    ##
+    def pleasure_reading_header
+        File.read('./fixtures/pleasure_reading_header')
+    end
 
 end
