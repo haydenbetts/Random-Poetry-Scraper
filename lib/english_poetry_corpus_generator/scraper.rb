@@ -12,7 +12,6 @@ class CorpusGenerator::Scraper
     end
 
     def scrape_poem_page
-        # return a hash
         poem_attributes = {}
         poem_attributes[:name] = html_doc.css(".poem").css("h2").text
         poem_attributes[:text] = html_doc.css(".poem").css("p").inner_html.gsub("<br>", "\n").gsub(/\r\n[\t]+/, "    ")
@@ -21,7 +20,6 @@ class CorpusGenerator::Scraper
             poem_attributes[:poet] = {}
             poem_attributes[:poet][:name] = poet_name
             poem_attributes[:poet][:profile_url] = ROOT_LINK + html_doc.css(".poem a").attr("href").value
-            binding.pry
         end
 
         return poem_attributes

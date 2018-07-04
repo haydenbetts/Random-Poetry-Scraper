@@ -99,3 +99,4 @@ example_hash = {:name => "Orstralia",
 }
 
 
+CorpusGenerator::Poem.new(example_hash)
