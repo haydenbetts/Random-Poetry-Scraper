@@ -35,7 +35,9 @@ class EnglishPoetryCorpusGenerator::CLI
             
             if input <= EnglishPoetryCorpusGenerator::SchoolPeriod.all.length && input > 0
                 school_name = EnglishPoetryCorpusGenerator::SchoolPeriod.all[input + 1].name
-                self.scraper.scrape_filtered_index_page('School / Period', school_name)
+                poet_attribute_hashes = self.scraper.scrape_filtered_index_page('School / Period', school_name)
+                EnglishPoetryCorpusGenerator::Poet.initialize_poets(poet_attribute_hashes)
+                binding.pry
             end
         # array = EnglishPoetryCorpusGenerator::Scraper.new.scrape_index_page
         # EnglishPoetryCorpusGenerator::Poet.initialize_poets(array)

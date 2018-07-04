@@ -39,21 +39,24 @@ class EnglishPoetryCorpusGenerator::Scraper
 
     def scrape_index_page
 
-        poet_info_nodes = @browser.ol(class: 'c-vList c-vList_bordered c-vList_bordered_thorough').lis
-        poet_info_nodes.each do |poet_info_node|
+        poet_info_nodes = @browser.ol(class: 'c-vList c-vList_bordered c-vList_bordered_thorough').divs(:class => "c-feature c-mix-feature_shrinkwrap")
+        
+        poet_attribute_hashes = poet_info_nodes.collect do |poet_info_node|
 
             poet_attribute_hash = {}
 
             poet_attribute_hash[:name] = poet_info_node.span.text
-
-            poems_node = poet_info_node.ul.lis
-            if poems_node
+            
+            # only scrape poems if poems element exists
+            if (poet_info_node.ul.lis[0]).present?
+                poems_node = poet_info_node.ul.lis
                 poet_attribute_hash[:poems] = poems_node.collect do |poem|
                     {:name => poem.text, :link => poem.link.href}
-                end
-                binding.pry
+                end.reject {|poem| poem == nil}
             end
+            poet_attribute_hash
         end
+        poet_attribute_hashes
     end
-    
+
 end

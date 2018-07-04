@@ -17,7 +17,9 @@ class EnglishPoetryCorpusGenerator::Poem
         @@all
     end
 
-    def self.initialize_poems
-        
+    def self.initialize_poems(poems_attributes)
+        poems_attributes.collect do |attributes|
+            self.new(attributes)
+        end
     end
 end
