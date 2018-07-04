@@ -1,7 +1,7 @@
 require 'pry'
 
 class CorpusGenerator::Poet
-    attr_accessor :name, :poems, :profile_url
+    attr_accessor :name, :profile_url, :poems
 
     @@all = []
 
@@ -25,19 +25,18 @@ class CorpusGenerator::Poet
         @@all
     end
 
-    def self.find_by_name
+    def self.find_by_name(name)
         self.all.detect {|poet| poet.name == name}
     end
 
-    def self.create_by_name(name)
-        self.new({:name => name})
-    end
 
-    def self.find_or_create_by_name(name)
-        if poet = self.find_by_name
+    def self.find_or_create(attributes)
+        # TODO assumes that there will be a name attribute in hash
+        # ...assumes that a hash will be passed in
+        if poet = self.find_by_name(attributes[:name])
             return poet
         else
-            self.create_by_name(name)
+            self.new(attributes)
         end
     end
 end
