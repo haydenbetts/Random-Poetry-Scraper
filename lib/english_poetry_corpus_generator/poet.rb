@@ -1,28 +1,21 @@
 require 'pry'
 
-class EnglishPoetryCorpusGenerator::Poet
-    extend EnglishPoetryCorpusGenerator::Concerns::Displayable
-    attr_accessor :name, :home_page
+class CorpusGenerator::Poet
+    attr_accessor :name, :poems
 
-    @@all = []   
+    @@all = []
 
-    def initialize(attributes = nil)
-        if attributes
-            attributes.each do |k,v|
-              self.send("#{k}=", v)
-            end
-        end
+    def initialize
+        self.poems = []
+    end
+
+    def save
         self.class.all << self
     end
 
-    def self.initialize_poets(poets)
-        poets.each do |poet|
-            EnglishPoetryCorpusGenerator::Poet.new(poet)
-        end
-    end
+    # Class Methods
 
     def self.all
         @@all
     end
-
 end

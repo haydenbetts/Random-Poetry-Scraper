@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-class EnglishPoetryCorpusGenerator::Scraper
+class CorpusGenerator::Scraper
     attr_accessor :html_doc
     BROWSE_LINK = "https://www.poetryfoundation.org/poets/browse"
 

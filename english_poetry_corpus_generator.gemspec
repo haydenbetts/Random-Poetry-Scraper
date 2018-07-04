@@ -5,7 +5,7 @@ require "english_poetry_corpus_generator/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "english_poetry_corpus_generator"
-  spec.version       = EnglishPoetryCorpusGenerator::VERSION
+  spec.version       = CorpusGenerator::VERSION
   spec.authors       = ["haydenbetts"]
   spec.email         = ["haydenbetts@gmail.com"]
 
