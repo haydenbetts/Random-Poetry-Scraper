@@ -18,12 +18,7 @@ class EnglishPoetryCorpusGenerator::CLI
             puts "To jump between poems, press tab"
             puts "Quit (Q)"
 
-            input = gets.strip
-
-            case input 
-            when "S"
-                list_schools
-            end
+            list_schools
         end
     end
 
@@ -31,6 +26,7 @@ class EnglishPoetryCorpusGenerator::CLI
 
         EnglishPoetryCorpusGenerator::SchoolPeriod.print_all_with_index
 
+        puts "Select which school you would like to return poems from: "
         input = gets.strip.to_i
         
         if input <= EnglishPoetryCorpusGenerator::SchoolPeriod.all.length && input > 0
@@ -42,10 +38,6 @@ class EnglishPoetryCorpusGenerator::CLI
                 poet.add_poet_attributes({:schools => [school.name]})
             end
         end
-
-    end
-
-    def list_filtered_poems(filter, filter_choice)
 
     end
 end
