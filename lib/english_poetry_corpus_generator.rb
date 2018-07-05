@@ -11,6 +11,7 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 require 'trollop'
+require 'json'
 
 module CorpusGenerator
   # Your code goes here...

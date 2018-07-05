@@ -8,7 +8,7 @@ class CorpusGenerator::CLI
         commandline_options = accept_command_line_options
 
         if commandline_options == {}
-            handle_help_message
+            handle_no_options_passed_message
         else
             if commandline_options[:num_poems] == nil
                 handle_no_num_poems_message
@@ -41,7 +41,7 @@ class CorpusGenerator::CLI
         opts.select { |k, v| opts[k] }
     end
 
-    def handle_help_message
+    def handle_no_options_passed_message
         puts ""
         puts "📖  English Poetry Corpus Generator requires you to pass in options indicating" 
         puts "the number of poems you would like to return, and their desired output format." 
@@ -81,7 +81,21 @@ class CorpusGenerator::CLI
                 i -= 1
             end
         end
+
+        set_current_poems_alphabetically
+
      end
+
+    ##
+    # => Return JSON directly
+    ##
+
+
+    # desired behavior
+    # in -> self.current_poems_alphabetized
+    # out -> json with all poems
+    # 
+
 
     ##
     # => The pleasure reading interface
@@ -133,7 +147,7 @@ class CorpusGenerator::CLI
             goodbye if input == 'exit'
 
             poem_selection_instructions
-            
+            set_current_poems_alphabetically
             list_current_poems
 
             get_poem_selection
@@ -150,7 +164,7 @@ class CorpusGenerator::CLI
 		puts "Or type exit to end the program."
     end
 
-    def set_poems_alphabetically
+    def set_current_poems_alphabetically
         self.current_poems_alphabetized = CorpusGenerator::Poem.all.sort_by {|poem| poem.name}
     end
 
@@ -198,7 +212,6 @@ class CorpusGenerator::CLI
         # TODO this is very messy
         poet_selection_instructions
         list_poets_alphabetically
-         
     end
 
     def poet_selection_instructions

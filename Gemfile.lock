@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     english_poetry_corpus_generator (0.1.0)
+      json
       nokogiri
       trollop
 
@@ -10,6 +11,7 @@ GEM
   specs:
     coderay (1.1.2)
     diff-lcs (1.3)
+    json (2.1.0)
     method_source (0.9.0)
     mini_portile2 (2.3.0)
     nokogiri (1.8.4)

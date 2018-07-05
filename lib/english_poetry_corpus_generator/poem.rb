@@ -1,4 +1,5 @@
 require 'pry'
+require 'json'
 
 class CorpusGenerator::Poem
     extend CorpusGenerator::Concerns::Displayable
@@ -24,9 +25,16 @@ class CorpusGenerator::Poem
         poet.add_poem(self)
     end
 
+    def as_hash
+    end
+
     # Class Methods
 
     def self.all
         @@all
     end
+
+    def self.poems_to_json(poems)
+    end
+
 end
