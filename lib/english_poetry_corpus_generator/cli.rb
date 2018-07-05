@@ -94,10 +94,6 @@ class CorpusGenerator::CLI
     # => The pleasure reading interface
     ##
 
-    def pleasure_reading_menu
-        get_pleasure_reading_menu_input
-    end
-
     def pleasure_reading_menu_instructions
         puts pleasure_reading_header
 
@@ -112,19 +108,23 @@ class CorpusGenerator::CLI
         File.read('./fixtures/pleasure_reading_header')
     end
 
-    def get_pleasure_reading_menu_input
+    def pleasure_reading_menu
         input = nil
 
-        while input != 'exit'
+        until input == 'exit'
+
             pleasure_reading_menu_instructions
             input = gets.strip
-
-            if input == 'poems'
-                poem_selection_menu              
-            elsif input == 'poets'
+            
+            case input
+            when 'poems'
+                poem_selection_menu  
+            when 'poets'
                 poet_selection_menu
-            elsif input != 'exit'
-                puts "Invalid option!"
+            when 'exit'
+                goodbye
+            else
+                puts "Invalid input! Please select a valid option!"
             end
         end
     end
@@ -206,9 +206,11 @@ class CorpusGenerator::CLI
     ##
 
     def poet_selection_instructions
-        puts "\nType the number of a poet whose poems you would like to read."
+        puts ""
+        puts "Type the number of a poet whose poems you would like to read."
 		puts "Or type menu to go up one menu."
-		puts "Or type exit to end the program."
+        puts "Or type exit to end the program."
+        puts ""
     end
 
     def list_poets_alphabetically
@@ -216,6 +218,7 @@ class CorpusGenerator::CLI
         self.current_poets_alphabetized.each.with_index(1) do |poet, index|
             puts "#{index}. #{poet.name}"
         end
+        puts ""
     end
 
     def poet_selection_menu
@@ -228,11 +231,12 @@ class CorpusGenerator::CLI
 
             input = gets.strip
 
-            if input.to_i > 0 && input.to_i <= self.current_poets_alphabetized.size
+            valid_index = input.to_i > 0 && input.to_i <= self.current_poets_alphabetized.size
+
+            if valid_index
                 selected_poet = self.current_poets_alphabetized[input.to_i - 1]
                 set_poems_alphabetically_by_poet(selected_poet)
                 poem_selection_menu
-
             elsif input == 'exit'
                 goodbye
             elsif input != 'menu'
