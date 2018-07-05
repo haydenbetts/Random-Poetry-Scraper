@@ -1,6 +1,6 @@
 # CorpusGenerator
 
-**English Poetry Corpus Generator** is a command line gem which returns the text of poems scraped from the Poetry Foundation website. You can read these texts in terminal for pleasure, or consume them into your own application. The Poetry Foundation tags poets by Poet's **Birthdate**, **School/Period**, and **Poet's Region**. You can subset the corpus of poems returned using these criteria.
+**English Poetry Corpus Generator** is a command line gem which returns any number of random poems scraped from poemhunter.com. You can consume the poems as JSON, or read them in your terminal.
 
 ## Installation
 
