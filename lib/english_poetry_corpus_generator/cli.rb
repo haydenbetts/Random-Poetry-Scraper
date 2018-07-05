@@ -104,7 +104,8 @@ class CorpusGenerator::CLI
         puts "How would you like to find poems to read?"
         puts "List poems alphabetically (poems)"
         puts "List poets alphabetically (poets)"
-		puts "Or type exit to end the program."
+        puts "Or type exit to end the program."
+        puts ""
     end
 
     def pleasure_reading_header
@@ -135,7 +136,8 @@ class CorpusGenerator::CLI
     def poem_selection_instructions
         puts "\nType the number of a poem to read it."
 		puts "Or type menu to go up one menu."
-		puts "Or type exit to end the program."
+        puts "Or type exit to end the program."
+        puts ""
     end
 
     def set_current_poems_alphabetically
@@ -146,6 +148,7 @@ class CorpusGenerator::CLI
         self.current_poems_alphabetized.each.with_index(1) do |poem, index|
             puts "#{index}. #{poem.name} - #{poem.poet.name}"
         end
+        puts ""
     end
 
     def poem_selection_menu(poet = nil)
@@ -173,13 +176,25 @@ class CorpusGenerator::CLI
     end
 
     def display_poem(poem)
-        puts "#{poem.name} - #{poem.poet.name}"
+
+        title_string = "#{poem.name} - #{poem.poet.name}"
+
+        puts ""
+        puts Array.new(title_string.length, "*").join('')
+        puts title_string
+        puts Array.new(title_string.length, "*").join('') 
+        puts ""
         puts "\n #{poem.text}"
+        puts ""
+        puts Array.new(title_string.length, "*").join('') 
+
     end
 
     def quit_or_continue_reading
+        puts ""
         puts "To exit now, type exit"
         puts "To return to the list of poems, press enter"
+        puts ""
 
         input = nil
         input = gets.strip
@@ -217,7 +232,7 @@ class CorpusGenerator::CLI
                 selected_poet = self.current_poets_alphabetized[input.to_i - 1]
                 set_poems_alphabetically_by_poet(selected_poet)
                 poem_selection_menu
-                
+
             elsif input == 'exit'
                 goodbye
             elsif input != 'menu'
