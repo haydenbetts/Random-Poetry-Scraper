@@ -87,15 +87,8 @@ class CorpusGenerator::CLI
      end
 
     ##
-    # => Return JSON directly
+    # => Function to facilitate returning JSON directly
     ##
-
-
-    # desired behavior
-    # in -> self.current_poems_alphabetized
-    # out -> json with all poems
-    # 
-
 
     ##
     # => The pleasure reading interface
@@ -139,25 +132,6 @@ class CorpusGenerator::CLI
     # => Menus and submenus for sorting by poem
     ##
 
-    def poem_selection_menu(poet = nil)
-        input = nil
-
-        while input != 'menu'
-
-            goodbye if input == 'exit'
-
-            poem_selection_instructions
-            set_current_poems_alphabetically
-            list_current_poems
-
-            get_poem_selection
-            # TODO this is very messy
-            poem_selection_instructions
-            list_current_poems
-            input = gets.strip       
-        end 
-    end
-
     def poem_selection_instructions
         puts "\nType the number of a poem to read it."
 		puts "Or type menu to go up one menu."
@@ -174,23 +148,27 @@ class CorpusGenerator::CLI
         end
     end
 
-    def get_poem_selection
+    def poem_selection_menu(poet = nil)
         input = nil
 
         while input != 'menu'
-            input = gets.strip
 
-            if input.to_i > 0 && input.to_i <= self.current_poems_alphabetized.size
+            poem_selection_instructions
+            list_current_poems
+
+            input = gets.strip
+            input_valid = input.to_i > 0 && input.to_i <= self.current_poems_alphabetized.size
+
+            if input_valid
                 selected_poem = self.current_poems_alphabetized[input.to_i - 1]
                 display_poem(selected_poem)
+                quit_or_continue_reading
+                next
             elsif input == 'exit'
                 goodbye
             elsif input != 'menu'
                 puts "Please enter a valid poem selection!"
             end
-
-            puts "To return to the poem selection menu, enter 'menu'"
-
         end
     end
 
@@ -199,20 +177,18 @@ class CorpusGenerator::CLI
         puts "\n #{poem.text}"
     end
 
+    def quit_or_continue_reading
+        puts "To exit now, type exit"
+        puts "To return to the list of poems, press enter"
+
+        input = nil
+        input = gets.strip
+        goodbye if input == 'exit'
+    end
+
     ##
     # => Menus and submenus for sorting by poet
     ##
-
-    def poet_selection_menu
-        input = nil
-            
-        poet_selection_instructions
-        list_poets_alphabetically
-        get_poet_selection
-        # TODO this is very messy
-        poet_selection_instructions
-        list_poets_alphabetically
-    end
 
     def poet_selection_instructions
         puts "\nType the number of a poet whose poems you would like to read."
@@ -227,16 +203,21 @@ class CorpusGenerator::CLI
         end
     end
 
-    def get_poet_selection
+    def poet_selection_menu
         input = nil
 
         while input != 'menu'
+
+            poet_selection_instructions
+            list_poets_alphabetically
+
             input = gets.strip
 
             if input.to_i > 0 && input.to_i <= self.current_poets_alphabetized.size
                 selected_poet = self.current_poets_alphabetized[input.to_i - 1]
                 set_poems_alphabetically_by_poet(selected_poet)
                 poem_selection_menu
+                
             elsif input == 'exit'
                 goodbye
             elsif input != 'menu'
