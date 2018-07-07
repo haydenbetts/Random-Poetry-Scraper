@@ -23,7 +23,6 @@ Or install it yourself as:
 The JSON follows the following structure:
 
 ```
-
 {  
    "poems":[  
       {  
@@ -41,6 +40,9 @@ The JSON follows the following structure:
             "name":"Maya Angelou",
             "profile_url":"https://w0.poemhunter.com/maya-angelou/"
          }
+      }
+   ]
+}
 ```
 
 **Note**: Newlines are included in the poem text attributes in order to preserve the text's original format.
