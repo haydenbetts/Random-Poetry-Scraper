@@ -20,7 +20,7 @@ Or install it yourself as:
     
 ## JSON Format
 
-Newlines are included in the poem text attributes in order to preserve the text's original format. The JSON follows the following structure:
+The JSON follows the following structure:
 
 ```
 
@@ -41,9 +41,9 @@ Newlines are included in the poem text attributes in order to preserve the text'
             "name":"Maya Angelou",
             "profile_url":"https://w0.poemhunter.com/maya-angelou/"
          }
-
-
 ```
+
+**Note**: Newlines are included in the poem text attributes in order to preserve the text's original format.
 
 ## Consuming Poem JSON Programmatically
 
