@@ -1,6 +1,5 @@
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
 
 class CorpusGenerator::Scraper
     attr_accessor :html_doc

@@ -1,11 +1,10 @@
-require 'pry'
 require 'trollop'
 
 class CorpusGenerator::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
     def call(commandline_options = nil)
-        # {:num_poems=>1, :json=>true}
+        
         commandline_options = accept_command_line_options if !commandline_options
 
         if commandline_options == {}

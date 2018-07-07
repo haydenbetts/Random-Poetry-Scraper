@@ -1,5 +1,3 @@
-require 'pry'
-
 class CorpusGenerator::Poet
     attr_accessor :name, :profile_url, :poems
 
