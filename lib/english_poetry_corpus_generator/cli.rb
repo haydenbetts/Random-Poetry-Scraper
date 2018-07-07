@@ -1,5 +1,3 @@
-require 'trollop'
-
 class CorpusGenerator::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
@@ -204,7 +202,9 @@ class CorpusGenerator::CLI
     end
 
     def pleasure_reading_header
-        File.read('./fixtures/pleasure_reading_header')
+        header_path = File.join( File.dirname(__FILE__), './pleasure_reading_header' )
+
+        File.read(header_path)
     end
 
     def poem_selection_instructions

@@ -1,42 +1,25 @@
 
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "english_poetry_corpus_generator/version"
+Gem::Specification.new do |s|
+  s.name        = 'english_poetry_corpus_generator'
+  s.version     = '0.1.0'
+  s.executables << 'english_poetry_corpus_generator'
+  s.summary       = %q{Scrape and return poems from https://www.poetryfoundation.org/}
+  s.description   = %q{English Poetry Corpus Generator is a command line gem which returns the text of poems scraped from poemhunter.com.}
+  s.authors     = ["Hayden Betts"]
+  s.email       = 'haydenbetts@gmail.com'
+  s.files       =  Dir["{lib}/**/*"]
+  s.homepage    =
+    'https://github.com/haydenbetts/english-poetry-corpus-generator-cli-app'
+  s.license       = 'MIT'
 
-Gem::Specification.new do |spec|
-  spec.name          = "english_poetry_corpus_generator"
-  spec.version       = CorpusGenerator::VERSION
-  spec.authors       = ["haydenbetts"]
-  spec.email         = ["haydenbetts@gmail.com"]
-
-  spec.summary       = %q{Scrape and return poems from https://www.poetryfoundation.org/}
-  spec.description   = %q{English Poetry Corpus Generator is a command line gem which returns the text of poems scraped from poemhunter.com.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
-  spec.license       = "MIT"
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
-
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
-
-  spec.add_development_dependency "bundler", "~> 1.16"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "pry"
-  spec.add_dependency "nokogiri"
-  spec.add_dependency "trollop"
-  spec.add_dependency "json"
+  s.add_development_dependency "bundler", "~> 1.16"
+  s.add_development_dependency "rake", "~> 10.0"
+  s.add_development_dependency "rspec", "~> 3.0"
+  s.add_development_dependency "pry"
+  s.add_dependency "nokogiri"
+  s.add_dependency "trollop"
+  s.add_dependency "json"
 
   
 end
+

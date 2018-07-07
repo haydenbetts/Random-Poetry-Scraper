@@ -1,6 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-
 class CorpusGenerator::Scraper
     attr_accessor :html_doc
     ROOT_LINK = "https://w0.poemhunter.com"

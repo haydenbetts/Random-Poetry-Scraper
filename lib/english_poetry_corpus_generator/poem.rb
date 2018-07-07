@@ -1,7 +1,4 @@
-require 'json'
-
 class CorpusGenerator::Poem
-    extend CorpusGenerator::Concerns::Displayable
     attr_accessor :name, :text, :poet
 
     @@all = []
