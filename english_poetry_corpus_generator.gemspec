@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'english_poetry_corpus_generator'
-  s.version     = '0.1.0'
+  s.version     = '0.1.3'
   s.executables << 'english_poetry_corpus_generator'
   s.summary       = %q{Scrape and return poems from https://www.poetryfoundation.org/}
   s.description   = %q{English Poetry Corpus Generator is a command line gem which returns the text of poems scraped from poemhunter.com.}
@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rake", "~> 10.0"
   s.add_development_dependency "rspec", "~> 3.0"
   s.add_development_dependency "pry"
-  s.add_dependency "nokogiri"
-  s.add_dependency "trollop"
-  s.add_dependency "json"
+  s.add_dependency "nokogiri", "~> 1.8.4"
+  s.add_dependency "trollop", "~> 2.0"
+  s.add_dependency "json", "~> 2.0"
   
 end
 
