@@ -60,17 +60,18 @@ class CorpusGenerator::CLI
      end
 
      def handle_valid_command_line_options(commandline_options)
-        get_poems(commandline_options[:num_poems])
 
         if commandline_options[:pleasure]
+            get_poems_with_status_updates(commandline_options[:num_poems])
             pleasure_reading_menu
         elsif commandline_options[:json]
+            get_poems_without_status_updates(commandline_options[:num_poems])
             puts CorpusGenerator::Poem.poems_to_json(self.current_poems_alphabetized)
         end
 
      end
 
-     def get_poems(num_poems)
+     def get_poems_with_status_updates(num_poems)
         num_poems.times do |i|
             poem_attributes = CorpusGenerator::Scraper.new.scrape_poem_page
 
@@ -79,6 +80,22 @@ class CorpusGenerator::CLI
                 puts "#{i + 1} poem(s) fetched succesfully."
             else 
                 puts "Failed. Trying again."
+                i -= 1
+            end
+        end
+
+        set_current_poems_alphabetically
+
+     end
+
+     def get_poems_without_status_updates(num_poems)
+        num_poems.times do |i|
+            poem_attributes = CorpusGenerator::Scraper.new.scrape_poem_page
+
+            # TODO possibly factor out?
+            if poem = CorpusGenerator::Poem.new(poem_attributes)
+                next
+            else 
                 i -= 1
             end
         end
@@ -221,7 +238,7 @@ class CorpusGenerator::CLI
         puts title_string
         puts Array.new(title_string.length, "*").join('') 
         puts ""
-        puts "\n #{poem.text}"
+        puts "\n#{poem.text}"
         puts ""
         puts Array.new(title_string.length, "*").join('') 
 
