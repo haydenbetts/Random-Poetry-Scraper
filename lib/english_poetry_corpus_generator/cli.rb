@@ -4,9 +4,10 @@ require 'trollop'
 class CorpusGenerator::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
-    def call
-        commandline_options = accept_command_line_options
+    def call(commandline_options = nil)
 
+        commandline_options = accept_command_line_options if !commandline_options
+        
         if commandline_options == {}
             handle_no_options_passed_message
         else
@@ -147,7 +148,7 @@ class CorpusGenerator::CLI
 
             input = gets.strip
             input_valid = input.to_i > 0 && input.to_i <= self.current_poems_alphabetized.size
-
+ 
             if input_valid
                 selected_poem = self.current_poems_alphabetized[input.to_i - 1]
                 display_poem(selected_poem)
