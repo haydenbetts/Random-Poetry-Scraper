@@ -26,6 +26,14 @@ class CorpusGenerator::Poem
     end
 
     def as_hash
+        {
+            "name" => self.name,
+            "text" => self.text,
+            "poet" => {
+                "name" => self.poet.name,
+                "profile_url" => self.poet.profile_url,
+            } 
+        }
     end
 
     # Class Methods
@@ -33,8 +41,17 @@ class CorpusGenerator::Poem
     def self.all
         @@all
     end
+    
+    def self.poems_to_hash(poems)
+        poems_hash = {"poems" => []}
+        poems.each do |poem| 
+            poems_hash["poems"] << poem.as_hash
+        end
+        poems_hash
+    end
 
     def self.poems_to_json(poems)
+        self.poems_to_hash(poems).to_json
     end
 
 end

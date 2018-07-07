@@ -100,3 +100,18 @@ example_hash = {:name => "Orstralia",
 
 
 CorpusGenerator::Poem.new(example_hash)
+
+- Main Menu
+    - Poems displayed with index menu
+    - Poets displayed with index menu
+         - Poems by poet displayed with index menu
+        - case 'menu'
+            break
+menu     
+
+while input != 'exit'
+
+end
+
+case 'exit'
+    exit
