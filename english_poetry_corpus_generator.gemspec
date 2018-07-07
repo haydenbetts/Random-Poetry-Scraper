@@ -1,4 +1,3 @@
-
 Gem::Specification.new do |s|
   s.name        = 'english_poetry_corpus_generator'
   s.version     = '0.1.0'
@@ -19,7 +18,6 @@ Gem::Specification.new do |s|
   s.add_dependency "nokogiri"
   s.add_dependency "trollop"
   s.add_dependency "json"
-
   
 end
 
