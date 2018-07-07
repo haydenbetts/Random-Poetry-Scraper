@@ -51,13 +51,14 @@ The JSON follows the following structure:
 
 There are two methods for consuming json using this gem.
 
-If you would like to consume the json inside of a ruby program, you can do the following. Set the :num_poems attribute to any integer of your choosing.
+If you would like to consume the json inside of a ruby program, you can do the following. 
 
 ```ruby
 require 'english_poetry_corpus_generator'
 
 poems_json = CorpusGenerator::CLI.new.call({:json => true, :num_poems => 2})
 ```
+**Note**: You can set the ```:num_poems``` attribute to any integer of your choosing.
 
 If you would like to consume the json in a standard shell, you can can do the following. This will output the poem json to ```stdout```.
 
