@@ -5,9 +5,9 @@ class CorpusGenerator::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
     def call(commandline_options = nil)
-
+        # {:num_poems=>1, :json=>true}
         commandline_options = accept_command_line_options if !commandline_options
-        
+
         if commandline_options == {}
             handle_no_options_passed_message
         else
@@ -67,7 +67,9 @@ class CorpusGenerator::CLI
             pleasure_reading_menu
         elsif commandline_options[:json]
             get_poems_without_status_updates(commandline_options[:num_poems])
-            puts CorpusGenerator::Poem.poems_to_json(self.current_poems_alphabetized)
+            json = CorpusGenerator::Poem.poems_to_json(self.current_poems_alphabetized)
+            puts json
+            return json
         end
 
      end

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["haydenbetts@gmail.com"]
 
   spec.summary       = %q{Scrape and return poems from https://www.poetryfoundation.org/}
-  spec.description   = %q{English Poetry Corpus Generator is a command line gem which returns the text of poems scraped from the Poetry Foundation website.}
+  spec.description   = %q{English Poetry Corpus Generator is a command line gem which returns the text of poems scraped from poemhunter.com.}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
