@@ -3,7 +3,12 @@
 **English Poetry Corpus Generator** is a command line gem which returns a variable number of random poems scraped from poemhunter.com. You can consume the poems as JSON, or read them in your terminal.
 
 ## Walk-through Video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/e32f1JUILEc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+![Alt Text](https://imgur.com/tKaGm8z)
+
+
+[Video Link](https://www.youtube.com/embed/e32f1JUILEc)
+
 
 ## Installation
 
