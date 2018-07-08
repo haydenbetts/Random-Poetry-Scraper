@@ -1,6 +1,6 @@
 # Random Poetry Scraper
 
-**Random Poetry Scraper** is a command line gem which returns a variable number of random poems scraped from poemhunter.com. You can consume the poems as JSON, or use the "pleasure reader" interface to read them in your terminal. ~Most~ poems on poemhunter.com are in English, but not all are. If you plan to to use this gem to build a corpus of poetry, you should do additional language validation.
+**Random Poetry Scraper** is a command line gem which returns a variable number of random poems scraped from poemhunter.com. You can consume the poems as JSON, or use the "pleasure reader" interface to read them in your terminal. Most poems on poemhunter.com are in English, but not all are. If you plan to to use this gem to build a corpus of poetry, you should do additional language validation.
 
 ## Walk-through Video
 [Video Link](https://www.youtube.com/embed/e32f1JUILEc)
