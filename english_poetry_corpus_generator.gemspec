@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
-  s.name        = 'english_poetry_corpus_generator'
-  s.version     = '0.1.3'
-  s.executables << 'english_poetry_corpus_generator'
-  s.summary       = %q{Scrape and return poems from https://www.poetryfoundation.org/}
-  s.description   = %q{English Poetry Corpus Generator is a command line gem which returns the text of poems scraped from poemhunter.com.}
+  s.name        = 'poetry_scraper'
+  s.version     = '0.1.0'
+  s.executables << 'poetry_scraper'
+  s.summary       = %q{Scrape and return a configurable number of random poems from poemhunter.com/}
+  s.description   = %q{Poetry Scraper is a command line gem which returns the the attributes of a configurable number of poems scraped from poemhunter.com. The gem allows you to consume the poems either through a JSON dump or through a command line "pleasure reading" interface.}
   s.authors     = ["Hayden Betts"]
   s.email       = 'haydenbetts@gmail.com'
   s.files       =  Dir["{lib}/**/*"]
   s.homepage    =
-    'https://github.com/haydenbetts/english-poetry-corpus-generator-cli-app'
+    'https://github.com/haydenbetts/poetry-scraper-cli-app'
   s.license       = 'MIT'
 
   s.add_development_dependency "bundler", "~> 1.16"
