@@ -4,8 +4,7 @@
 
 ## Walk-through Video
 
-![Alt Text](https://imgur.com/tKaGm8z)
-
+![](https://media.giphy.com/media/5T05SJBQBpX7KTZxCY/giphy.gif)
 
 [Video Link](https://www.youtube.com/embed/e32f1JUILEc)
 
