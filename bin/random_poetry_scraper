@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "random_poetry_scraper"
+
+CorpusGenerator::CLI.new.call
