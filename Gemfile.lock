@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    english_poetry_corpus_generator (0.1.0)
-      json
-      nokogiri
-      trollop
+    random_poetry_scraper (0.1.0)
+      json (~> 2.0)
+      nokogiri (~> 1.8.4)
+      trollop (~> 2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -40,9 +40,9 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  english_poetry_corpus_generator!
   pry
   rake (~> 10.0)
+  random_poetry_scraper!
   rspec (~> 3.0)
 
 BUNDLED WITH

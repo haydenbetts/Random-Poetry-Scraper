@@ -2,4 +2,4 @@
 
 require "bundler/setup"
 
-CorpusGenerator::CLI.new.call
+RandomPoetry::CLI.new.call

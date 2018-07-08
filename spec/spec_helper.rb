@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "english_poetry_corpus_generator"
+require "random_poetry_scraper"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

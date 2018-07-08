@@ -1,6 +1,6 @@
-# Poetry Scraper
+# Random Poetry Scraper
 
-**Poetry Scraper** is a command line gem which returns a variable number of random poems scraped from poemhunter.com. You can consume the poems as JSON, or use the "pleasure reader" interface to read them in your terminal.
+**Random Poetry Scraper** is a command line gem which returns a variable number of random poems scraped from poemhunter.com. You can consume the poems as JSON, or use the "pleasure reader" interface to read them in your terminal.
 
 ## Walk-through Video
 [Video Link](https://www.youtube.com/embed/e32f1JUILEc)
@@ -12,7 +12,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'english_poetry_corpus_generator'
+gem 'random_poetry_scraper'
 ```
 
 And then execute:
@@ -21,7 +21,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install english_poetry_corpus_generator
+    $ gem install random_poetry_scraper
     
 ## JSON Format
 
@@ -59,7 +59,7 @@ There are two methods for consuming json using this gem.
 If you would like to consume the json inside of a ruby program, you can do the following. 
 
 ```ruby
-require 'english_poetry_corpus_generator'
+require 'random_poetry_scraper'
 
 poems_json = CorpusGenerator::CLI.new.call({:json => true, :num_poems => 2})
 ```
@@ -68,13 +68,13 @@ poems_json = CorpusGenerator::CLI.new.call({:json => true, :num_poems => 2})
 If you would like to consume the json in a standard shell, you can can do the following. This will output the poem json to ```stdout```.
 
 ```
-english_poetry_corpus_generator --num-poems=2 --json
+random_poetry_scraper --num-poems=2 --json
 ```
 
 From ```stdout```, you can dump the poem json to a file e.g.
 
 ```
-english_poetry_corpus_generator --num-poems=2 --json > poems.json
+random_poetry_scraper --num-poems=2 --json > poems.json
 ```
 
 ## License
