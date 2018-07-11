@@ -3,8 +3,11 @@ class RandomPoetryScraper::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
     def call(commandline_options = nil)
-        desired_interface, num_poems = RandomPoetryScraper::CommandLineOptions.handle_command_line_options(commandline_options)
-       
+        desired_interface, num_poems = RandomPoetryScraper::CommandLineOptions.parse(commandline_options)
+        start_chosen_interface(desired_interface, num_poems)
+    end
+
+    def start_chosen_interface(desired_interface, num_poems)
         if desired_interface === "pleasure"
             get_poems(num_poems, "Verbose Output")
             pleasure_reading_menu
@@ -14,8 +17,6 @@ class RandomPoetryScraper::CLI
             puts json
             return json
         end
-
-
     end
 
     ##

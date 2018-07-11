@@ -1,23 +1,23 @@
 class RandomPoetryScraper::CommandLineOptions
 
-    def self.handle_command_line_options(commandline_options)
+    def self.parse(commandline_options)
         
-        commandline_options = parse_command_line_options if !commandline_options
+        commandline_options = trollop_parser if !commandline_options
 
         if commandline_options == {}
-            handle_no_options_passed_message
+            no_options_passed_message
         else
             if commandline_options[:num_poems] == nil
-                handle_no_num_poems_passed_message
+                no_num_poems_passed_message
             elsif commandline_options[:json] && commandline_options[:pleasure]
-                handle_json_and_pleasure_passed_message
+                json_and_pleasure_passed_message
             else
-                handle_valid_command_line_options(commandline_options)
+                parse_valid(commandline_options)
             end
         end 
     end
 
-    def self.handle_valid_command_line_options(commandline_options)
+    def self.parse_valid(commandline_options)
 
         if commandline_options[:pleasure]
             return ["pleasure", commandline_options[:num_poems]]
@@ -26,7 +26,7 @@ class RandomPoetryScraper::CommandLineOptions
         end
      end
 
-     def self.parse_command_line_options
+     def self.trollop_parser
         opts = Trollop::options do
             version <<-EOS
             📖   Random Poetry Scraper
@@ -47,7 +47,7 @@ class RandomPoetryScraper::CommandLineOptions
         opts.select { |k, v| opts[k] }
     end
 
-    def self.handle_no_options_passed_message
+    def self.no_options_passed_message
         puts ""
         puts "📖  Random Poetry Scraper requires you to pass in options indicating" 
         puts "the number of poems you would like to return, and their desired output format." 
@@ -55,12 +55,12 @@ class RandomPoetryScraper::CommandLineOptions
         puts ""
      end
 
-     def self.handle_json_and_pleasure_passed_message
+     def self.json_and_pleasure_passed_message
         puts "Cannot run with both the --json and --pleasure flags selected"
         puts "Run with --help for help."
      end
 
-     def self.handle_no_num_poems_passed_message
+     def self.no_num_poems_passed_message
         puts "Cannot run without a --num-poems selected"
         puts "Run with --help for help."
      end
