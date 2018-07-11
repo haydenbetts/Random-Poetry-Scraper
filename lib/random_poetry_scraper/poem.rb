@@ -1,4 +1,4 @@
-class CorpusGenerator::Poem
+class RandomPoetryScraper::Poem
     attr_accessor :name, :text, :poet
 
     @@all = []
@@ -16,7 +16,7 @@ class CorpusGenerator::Poem
     # this expects that if there is a poet attribute, it will have a name.
     # that might hardcode too much knowledge about the structure of the hash?
     def poet=(poet_attributes)
-        poet = CorpusGenerator::Poet.find_or_create(poet_attributes)
+        poet = RandomPoetryScraper::Poet.find_or_create(poet_attributes)
         @poet = poet
         poet.add_poem(self)
     end

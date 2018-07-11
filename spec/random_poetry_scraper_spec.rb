@@ -1,6 +1,6 @@
-RSpec.describe CorpusGenerator do
+RSpec.describe RandomPoetryScraper do
   it "has a version number" do
-    expect(CorpusGenerator::VERSION).not_to be nil
+    expect(RandomPoetryScraper::VERSION).not_to be nil
   end
 
   it "does something useful" do

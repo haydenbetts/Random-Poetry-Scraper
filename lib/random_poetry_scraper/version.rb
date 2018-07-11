@@ -1,2 +1,2 @@
-module CorpusGenerator
+module RandomPoetryScraper
 end

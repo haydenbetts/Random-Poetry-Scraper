@@ -61,7 +61,7 @@ If you would like to consume the json inside of a ruby program, you can do the f
 ```ruby
 require 'random_poetry_scraper'
 
-poems_json = CorpusGenerator::CLI.new.call({:json => true, :num_poems => 2})
+poems_json = RandomPoetryScraper::CLI.new.call({:json => true, :num_poems => 2})
 ```
 **Note**: You can set the ```:num_poems``` attribute to any integer of your choosing.
 

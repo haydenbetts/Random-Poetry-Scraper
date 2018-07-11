@@ -1,4 +1,4 @@
-class CorpusGenerator::Poet
+class RandomPoetryScraper::Poet
     attr_accessor :name, :profile_url, :poems
 
     @@all = []

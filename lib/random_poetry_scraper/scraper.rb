@@ -1,4 +1,4 @@
-class CorpusGenerator::Scraper
+class RandomPoetryScraper::Scraper
     attr_accessor :html_doc
     ROOT_LINK = "https://w0.poemhunter.com"
     BROWSE_LINK = ROOT_LINK + "/members/random-poem/"

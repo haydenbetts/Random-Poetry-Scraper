@@ -1,4 +1,4 @@
-class CorpusGenerator::CLI
+class RandomPoetryScraper::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
     def call(commandline_options = nil)
@@ -33,7 +33,7 @@ class CorpusGenerator::CLI
             pleasure_reading_menu
         elsif commandline_options[:json]
             get_poems(commandline_options[:num_poems])
-            json = CorpusGenerator::Poem.poems_to_json(self.current_poems_alphabetized)
+            json = RandomPoetryScraper::Poem.poems_to_json(self.current_poems_alphabetized)
             puts json
             return json
         end
@@ -80,9 +80,9 @@ class CorpusGenerator::CLI
 
      def get_poems(num_poems, verbose_output = nil)
         num_poems.times do |i|
-            poem_attributes = CorpusGenerator::Scraper.new.scrape_poem_page
+            poem_attributes = RandomPoetryScraper::Scraper.new.scrape_poem_page
 
-            if poem = CorpusGenerator::Poem.new(poem_attributes)
+            if poem = RandomPoetryScraper::Poem.new(poem_attributes)
                 puts "#{i + 1} poem(s) fetched succesfully." if verbose_output
                 next
             else 
@@ -96,7 +96,7 @@ class CorpusGenerator::CLI
      end
 
     def set_current_poems_alphabetically
-        self.current_poems_alphabetized = CorpusGenerator::Poem.all.sort_by {|poem| poem.name}
+        self.current_poems_alphabetized = RandomPoetryScraper::Poem.all.sort_by {|poem| poem.name}
     end
 
     ##
@@ -257,7 +257,7 @@ class CorpusGenerator::CLI
     end
 
     def list_poets_alphabetically
-        self.current_poets_alphabetized = CorpusGenerator::Poet.all.sort_by {|poet| poet.name}
+        self.current_poets_alphabetized = RandomPoetryScraper::Poet.all.sort_by {|poet| poet.name}
         self.current_poets_alphabetized.each.with_index(1) do |poet, index|
             puts "#{index}. #{poet.name}"
         end

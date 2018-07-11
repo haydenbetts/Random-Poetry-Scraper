@@ -1,4 +1,4 @@
-module CorpusGenerator::Concerns
+module RandomPoetryScraper::Concerns
     module Displayable
     end
 end
