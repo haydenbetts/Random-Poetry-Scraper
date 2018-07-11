@@ -3,8 +3,8 @@ class RandomPoetryScraper::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
     def call(commandline_options = nil)
-        desired_interface, num_poems = RandomPoetryScraper::CommandLineOptions.parse(commandline_options)
-        start_chosen_interface(desired_interface, num_poems)
+        interface, num_poems = RandomPoetryScraper::CommandLineOptions.parse(commandline_options)
+        start_chosen_interface(interface, num_poems)
     end
 
     def start_chosen_interface(desired_interface, num_poems)
@@ -20,7 +20,7 @@ class RandomPoetryScraper::CLI
     end
 
     ##
-    # => Parse and handle command line options
+    # => Scrape and instantiate poems
     ##
 
      def get_poems(num_poems, verbose_output = nil)
