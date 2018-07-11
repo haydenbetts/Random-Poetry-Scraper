@@ -1,82 +1,26 @@
+require 'pry'
 class RandomPoetryScraper::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
     def call(commandline_options = nil)
-        handle_command_line_options(commandline_options)
+        desired_interface, num_poems = RandomPoetryScraper::CommandLineOptions.handle_command_line_options(commandline_options)
+       
+        if desired_interface === "pleasure"
+            get_poems(num_poems, "Verbose Output")
+            pleasure_reading_menu
+        elsif desired_interface == "json"
+            get_poems(num_poems)
+            json = RandomPoetryScraper::Poem.poems_to_json(self.current_poems_alphabetized)
+            puts json
+            return json
+        end
+
+
     end
 
     ##
     # => Parse and handle command line options
     ##
-
-    def handle_command_line_options(commandline_options)
-        
-        commandline_options = parse_command_line_options if !commandline_options
-
-        if commandline_options == {}
-            handle_no_options_passed_message
-        else
-            if commandline_options[:num_poems] == nil
-                handle_no_num_poems_passed_message
-            elsif commandline_options[:json] && commandline_options[:pleasure]
-                handle_json_and_pleasure_passed_message
-            else
-                handle_valid_command_line_options(commandline_options)
-            end
-        end 
-    end
-
-    def handle_valid_command_line_options(commandline_options)
-
-        if commandline_options[:pleasure]
-            get_poems(commandline_options[:num_poems], "Verbose Output")
-            pleasure_reading_menu
-        elsif commandline_options[:json]
-            get_poems(commandline_options[:num_poems])
-            json = RandomPoetryScraper::Poem.poems_to_json(self.current_poems_alphabetized)
-            puts json
-            return json
-        end
-     end
-
-    def parse_command_line_options
-        opts = Trollop::options do
-            version <<-EOS
-            📖   Random Poetry Scraper
-            Version 1.0 | July 2018
-            Hayden Betts | @hayden_betts
-            EOS
-
-            banner <<~EOS
-            \n📖  Random Poetry Scraper is a command line gem which returns the text of poems scraped from poemhunter.com.
-            \n
-            Usage:
-            \n
-            EOS
-          opt :num_poems, "Number of poems to return", :type => :integer    
-          opt :json, "Output poems and their attributes directly to json"
-          opt :pleasure, "Scrape poems and then enter a CLI for pleasure reading"
-        end
-        opts.select { |k, v| opts[k] }
-    end
-
-    def handle_no_options_passed_message
-        puts ""
-        puts "📖  Random Poetry Scraper requires you to pass in options indicating" 
-        puts "the number of poems you would like to return, and their desired output format." 
-        puts "Run with --help for help."
-        puts ""
-     end
-
-     def handle_json_and_pleasure_passed_message
-        puts "Cannot run with both the --json and --pleasure flags selected"
-        puts "Run with --help for help."
-     end
-
-     def handle_no_num_poems_passed_message
-        puts "Cannot run without a --num-poems selected"
-        puts "Run with --help for help."
-     end
 
      def get_poems(num_poems, verbose_output = nil)
         num_poems.times do |i|
