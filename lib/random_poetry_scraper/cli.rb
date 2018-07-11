@@ -2,23 +2,44 @@ class CorpusGenerator::CLI
     attr_accessor :current_poems_alphabetized, :current_poets_alphabetized
 
     def call(commandline_options = nil)
+        handle_command_line_options(commandline_options)
+    end
+
+    ##
+    # => Parse and handle command line options
+    ##
+
+    def handle_command_line_options(commandline_options)
         
-        commandline_options = accept_command_line_options if !commandline_options
+        commandline_options = parse_command_line_options if !commandline_options
 
         if commandline_options == {}
             handle_no_options_passed_message
         else
             if commandline_options[:num_poems] == nil
-                handle_no_num_poems_message
+                handle_no_num_poems_passed_message
             elsif commandline_options[:json] && commandline_options[:pleasure]
-                handle_json_and_pleasure_message
+                handle_json_and_pleasure_passed_message
             else
                 handle_valid_command_line_options(commandline_options)
             end
         end 
     end
 
-    def accept_command_line_options
+    def handle_valid_command_line_options(commandline_options)
+
+        if commandline_options[:pleasure]
+            get_poems(commandline_options[:num_poems], "Verbose Output")
+            pleasure_reading_menu
+        elsif commandline_options[:json]
+            get_poems(commandline_options[:num_poems])
+            json = CorpusGenerator::Poem.poems_to_json(self.current_poems_alphabetized)
+            puts json
+            return json
+        end
+     end
+
+    def parse_command_line_options
         opts = Trollop::options do
             version <<-EOS
             📖   Random Poetry Scraper
@@ -47,55 +68,25 @@ class CorpusGenerator::CLI
         puts ""
      end
 
-     def handle_json_and_pleasure_message
+     def handle_json_and_pleasure_passed_message
         puts "Cannot run with both the --json and --pleasure flags selected"
         puts "Run with --help for help."
      end
 
-     def handle_no_num_poems_message
+     def handle_no_num_poems_passed_message
         puts "Cannot run without a --num-poems selected"
         puts "Run with --help for help."
      end
 
-     def handle_valid_command_line_options(commandline_options)
-
-        if commandline_options[:pleasure]
-            get_poems_with_status_updates(commandline_options[:num_poems])
-            pleasure_reading_menu
-        elsif commandline_options[:json]
-            get_poems_without_status_updates(commandline_options[:num_poems])
-            json = CorpusGenerator::Poem.poems_to_json(self.current_poems_alphabetized)
-            puts json
-            return json
-        end
-
-     end
-
-     def get_poems_with_status_updates(num_poems)
+     def get_poems(num_poems, verbose_output = nil)
         num_poems.times do |i|
             poem_attributes = CorpusGenerator::Scraper.new.scrape_poem_page
 
-            # TODO possibly factor out?
             if poem = CorpusGenerator::Poem.new(poem_attributes)
-                puts "#{i + 1} poem(s) fetched succesfully."
-            else 
-                puts "Failed. Trying again."
-                i -= 1
-            end
-        end
-
-        set_current_poems_alphabetically
-
-     end
-
-     def get_poems_without_status_updates(num_poems)
-        num_poems.times do |i|
-            poem_attributes = CorpusGenerator::Scraper.new.scrape_poem_page
-
-            # TODO possibly factor out?
-            if poem = CorpusGenerator::Poem.new(poem_attributes)
+                puts "#{i + 1} poem(s) fetched succesfully." if verbose_output
                 next
             else 
+                puts "Failed. Trying again." if verbose_output
                 i -= 1
             end
         end
@@ -107,10 +98,6 @@ class CorpusGenerator::CLI
     def set_current_poems_alphabetically
         self.current_poems_alphabetized = CorpusGenerator::Poem.all.sort_by {|poem| poem.name}
     end
-
-    ##
-    # => Function to facilitate returning JSON directly
-    ##
 
     ##
     # => The pleasure reading interface
