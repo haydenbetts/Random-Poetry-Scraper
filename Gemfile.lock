@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    random_poetry_scraper (0.1.0)
+    random_poetry_scraper (0.1.1)
       json (~> 2.0)
       nokogiri (~> 1.8.4)
       trollop (~> 2.0)
@@ -46,4 +46,4 @@ DEPENDENCIES
   rspec (~> 3.0)
 
 BUNDLED WITH
-   1.16.0
+   1.16.2
